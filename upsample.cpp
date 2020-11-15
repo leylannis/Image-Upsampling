@@ -18,28 +18,41 @@ using namespace std;
 
 // global definitions
 vector< vector<int> > matrix;
+vector< vector<int> > newmatrix;
 int parse_input(char* filename);
+void nearest_neighbor();
 
 int main(int argc, char* argv[]) {
 
     char* inputfile = argv[1];
     if (parse_input(inputfile) == 0){	// parsing input matrix successful
 
-    // process image here to double size
+    nearest_neighbor();
 
-    /*  printing matrix contents for testing purposes  
-        for (int i=0; i < matrix.size(); i++){
-	    for (int j=0; j < matrix[i].size(); j++){
-	        cout << matrix[i][j] << " ";
+    // printing matrix contents for testing purposes  
+        for (int i=0; i < newmatrix.size(); i++){
+	    for (int j=0; j < newmatrix[i].size(); j++){
+	        cout << newmatrix[i][j] << ", ";
 	    }
 	    cout << endl;
-        } */
+        } 
 
+    }
+    else
+        cout << "unable to open file\n";
+
+    return 0;
 }
-else
-    cout << "unable to open file\n";
 
-return 0;
+
+void nearest_neighbor(){
+    for (int i=0; i<matrix.size()*2; i++) {
+        vector<int> newrow;
+        for (int j=0; j<matrix.size()*2; j++) {
+	    newrow.push_back(matrix[i/2][j/2]);
+        }                
+	newmatrix.push_back(newrow);
+    }                
 }
 
 int parse_input(char* filename){
