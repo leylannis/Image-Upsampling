@@ -2,17 +2,12 @@
 // data is stored in row major order
 // upsample.cpp will output 512x512 matrix of the same type as input (2x upsample)
 
-// implement 2 methods
-// comment out worse one in bottom of file; better one above
-
-//w1 = 256		h1 = 256
-//w2 = 512 (256*2)	h2 = 512 (256*2)
-
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -21,18 +16,20 @@ vector< vector<int> > matrix;
 vector< vector<int> > newmatrix;
 int parse_input(char* filename);
 void nearest_neighbor();
+void my_interpolation();
 
 int main(int argc, char* argv[]) {
 
     char* inputfile = argv[1];
     if (parse_input(inputfile) == 0){	// parsing input matrix successful
 
-    nearest_neighbor();
+    //nearest_neighbor();
+    my_interpolation();
 
     // printing matrix contents for testing purposes  
         for (int i=0; i < newmatrix.size(); i++){
 	    for (int j=0; j < newmatrix[i].size(); j++){
-	        cout << newmatrix[i][j] << ", ";
+	        cout << newmatrix[i][j] << ",";
 	    }
 	    cout << endl;
         } 
@@ -44,6 +41,30 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+void my_interpolation(){
+    for (int i=0; i<matrix.size()*2; i++){
+        vector<int> newrow;
+        int val1, val2, val3, val4, val5, val6, val7, val8, val9;
+        for (int j=0; j<matrix.size()*2; j++){ 
+	    
+            val1 = matrix[abs(i%256)][abs(j%256)];
+            val2 = matrix[abs(i%256)][abs((j+1)%256)];
+            val3 = matrix[abs(i%256)][abs((j-1)%256)];
+
+            val4 = matrix[abs((i+1)%256)][abs(j%256)];
+            val5 = matrix[abs((i+1)%256)][abs((j+1)%256)];
+            val6 = matrix[abs((i+1)%256)][abs((j-1)%256)];
+
+            val7 = matrix[abs((i-1)%256)][abs(j%256)];
+            val8 = matrix[abs((i-1)%256)][abs((j+1)%256)];
+	    val9 = matrix[abs((i-1)%256)][abs((j-1)%256)];
+
+	    newrow.push_back(floor((val1+val2+val3+val4+val7)/5));
+            newrow.push_back(floor((val1+val2+val3+val4+val5+val6+val7+val8+val9)/9));
+        }
+	newmatrix.push_back(newrow);
+    }
+}
 
 void nearest_neighbor(){
     for (int i=0; i<matrix.size()*2; i++) {
@@ -63,11 +84,11 @@ int parse_input(char* filename){
         int nextint;
         char delim;
         while (getline(infile, inputline)) {
-            istringstream iss(inputline);
+            istringstream linestream(inputline);
             vector<int> row;
-            while (iss >> nextint) {
+            while (linestream >> nextint) {
                 row.push_back(nextint);
-                iss >> delim;
+                linestream >> delim;
             }
             matrix.push_back(row);
         }
