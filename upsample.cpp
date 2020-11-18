@@ -34,32 +34,27 @@ int main(int argc, char* argv[]) {
 
 
 vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
-    for (int i=0; i<matrix.size()*matrix.size(); i++){
-        if ( (i/matrix.size())%2 == 0){
-            if (matrix[i/matrix.size()][i%matrix.size()] == -1){
-		int newval = (matrix[i/matrix.size()+1][i%matrix.size()] + abs((0.5*(matrix[i/matrix.size()+1][i%matrix.size()] - matrix[i/matrix.size()][i%matrix.size()-1]))));
-                matrix[i/matrix.size()][i%matrix.size()] = newval;
+    for (int i=0; i< matrix.size()*matrix.size(); i++){
+	int row = i/matrix.size();
+	int col = i%matrix.size();
+	if ( row%2 == 0 && col != matrix.size()-1 ){
+	    if (matrix[row][col] == -1){
+		int val = (0.5*matrix[row][col-1])+(0.5*matrix[row][col+1]);
+		matrix[row][col] = val;
 	    }
+	}
+	else if ( row%2 == 0 && col == matrix.size()-1 ){
+	    matrix[row][col] = matrix[row][col-1];
+	}
+        if ( row%2 != 0 && row != matrix.size()-1 ){
+            int val = (0.5*matrix[row-1][col])+(0.5*matrix[row+1][col]);
+            matrix[row][col] = val;
         }
-        else{              
-            matrix[i/matrix.size()][i%matrix.size()] = matrix[i/matrix.size() -1][i%matrix.size()];
+        else if ( row%2 != 0 && row == matrix.size()-1 ){
+            matrix[row][col] = matrix[row-1][col];
         }
     }
     return matrix;
-
-/*
-    vector< vector <int> > newmatrix;
-    for (int i=0; i<matrix.size()*2; i++){
-        vector<int> newrow;
-        for (int j=0; j<matrix.size(); j++){ 
-	    newrow.push_back(matrix[i%matrix.size()][j%matrix.size()]);
-	    int val = (matrix[i%matrix.size()][j%matrix.size()] + abs((0.5*(matrix[i%matrix.size()][j%matrix.size()] - matrix[i%matrix.size()][j%matrix.size()]))) );
-	    newrow.push_back(val);
-        }
-	newmatrix.push_back(newrow);
-    }
-    return newmatrix;
-*/
 }
 
 vector<vector<int> > nearest_neighbor(vector< vector<int> > matrix){
