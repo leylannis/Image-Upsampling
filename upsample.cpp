@@ -24,8 +24,8 @@ int main(int argc, char* argv[]) {
     matrix = parse_input(inputfile);    
     newmatrix = resize_matrix(matrix);
 
-    newmatrix = nearest_neighbor(newmatrix);
-    //newmatrix = my_interpolation(matrix);
+    //newmatrix = nearest_neighbor(newmatrix);
+    newmatrix = my_interpolation(newmatrix);
 
     print_matrix(outputfile, newmatrix);
 
@@ -34,8 +34,21 @@ int main(int argc, char* argv[]) {
 
 
 vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
-    vector< vector <int> > newmatrix;
+    for (int i=0; i<matrix.size()*matrix.size(); i++){
+        if ( (i/matrix.size())%2 == 0){
+            if (matrix[i/matrix.size()][i%matrix.size()] == -1){
+		int newval = (matrix[i/matrix.size()+1][i%matrix.size()] + abs((0.5*(matrix[i/matrix.size()+1][i%matrix.size()] - matrix[i/matrix.size()][i%matrix.size()-1]))));
+                matrix[i/matrix.size()][i%matrix.size()] = newval;
+	    }
+        }
+        else{              
+            matrix[i/matrix.size()][i%matrix.size()] = matrix[i/matrix.size() -1][i%matrix.size()];
+        }
+    }
+    return matrix;
 
+/*
+    vector< vector <int> > newmatrix;
     for (int i=0; i<matrix.size()*2; i++){
         vector<int> newrow;
         for (int j=0; j<matrix.size(); j++){ 
@@ -46,10 +59,10 @@ vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
 	newmatrix.push_back(newrow);
     }
     return newmatrix;
+*/
 }
 
 vector<vector<int> > nearest_neighbor(vector< vector<int> > matrix){
-
     for (int i=0; i<matrix.size()*matrix.size(); i++){
         if ( (i/matrix.size())%2 == 0){
 	    if (matrix[i/matrix.size()][i%matrix.size()] == -1)
@@ -60,18 +73,6 @@ vector<vector<int> > nearest_neighbor(vector< vector<int> > matrix){
 	}
     }
     return matrix;
-
-/*
-    vector< vector<int> > newmatrix;
-    for (int i=0; i<matrix.size()*2; i++) {
-        vector<int> newrow;
-        for (int j=0; j<matrix.size()*2; j++) {
-	    newrow.push_back(matrix[i/2][j/2]);
-        }                
-	newmatrix.push_back(newrow);
-    }
-    return newmatrix;
-*/
 }
 
 vector< vector<int> > resize_matrix(vector< vector<int> > matrix){
