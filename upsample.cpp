@@ -37,23 +37,23 @@ vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
     for (int i=0; i< matrix.size()*matrix.size(); i++){
 	int row = i/matrix.size();
 	int col = i%matrix.size();
+
 	if ( row%2 == 0 && col != matrix.size()-1 ){
 	    if (matrix[row][col] == -1){
-		int val = matrix[row][col-1] + 0.25*( abs( matrix[row][col+1] - matrix[row][col-1] ) );
+		int val = ceil(0.75*matrix[row][col-1] + 0.25*( abs( matrix[row][col+1] - matrix[row][col-1] ) ));
 		matrix[row][col] = val;
 	    }
 	}
 	else if ( row%2 == 0 && col == matrix.size()-1 ){
-	    int val = matrix[row][col-1] + 0.25*( abs( matrix[row+1][col] - matrix[row][col-1] ) );
+	    int val = ceil(matrix[row][col-1] + 0.25*( abs( matrix[row+1][col] - matrix[row][col-1] ) ));
 	    matrix[row][col] = val;
 	}
         if ( row%2 != 0 && row != matrix.size()-1 ){
-            //int val = (0.5*matrix[row-1][col])+(0.5*matrix[row+1][col]);
-	    int val = matrix[row-1][col] + 0.25*( abs( matrix[row+1][col] - matrix[row-1][col] ) );
+	    int val = ceil(matrix[row-1][col] + 0.25*( abs( matrix[row+1][col] - matrix[row-1][col] ) ));
             matrix[row][col] = val;
         }
         else if ( row%2 != 0 && row == matrix.size()-1 ){
-	    int val = matrix[row-1][col] + 0.25*( abs( matrix[row][col+1] - matrix[row-1][col] ) );
+	    int val = ceil(0.75*matrix[row-1][col] + 0.25*( abs( matrix[row][col+1] - matrix[row-1][col] ) ));
             matrix[row][col] = val;
         }
     }
