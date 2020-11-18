@@ -9,11 +9,13 @@ using namespace std;
 
 // function declarations
 vector< vector<int> > parse_input(char* filename);
+void print_matrix(char* filename, vector< vector<int> > matrix);
 vector< vector<int> > nearest_neighbor(vector< vector<int> > matrix);
 vector< vector<int> > my_interpolation(vector< vector<int> > matrix);
 
 int main(int argc, char* argv[]) {
     char* inputfile = argv[1];
+    char* outputfile = argv[2];
 
     vector< vector<int> > matrix;
     vector< vector<int> > newmatrix;
@@ -23,13 +25,8 @@ int main(int argc, char* argv[]) {
     newmatrix = nearest_neighbor(matrix);
     //newmatrix = my_interpolation(matrix);
 
-    // printing matrix contents for testing purposes  
-    for (int i=0; i < newmatrix.size(); i++){
-	for (int j=0; j < newmatrix[i].size(); j++){
-	    cout << newmatrix[i][j] << ",";
-	}
-	cout << endl;
-    } 
+    print_matrix(outputfile, newmatrix);
+
     return 0;
 }
 
@@ -78,6 +75,20 @@ vector<vector<int> > parse_input(char* filename){
             }
             matrix.push_back(row);
         }
+	infile.close();
         return matrix;	
+    }
+}
+
+void print_matrix(char* filename, vector< vector<int> > matrix){
+    ofstream outfile(filename);
+
+    if (outfile.is_open()){
+        for (int i=0; i < matrix.size(); i++){
+            for (int j=0; j < matrix[i].size(); j++){
+                outfile << matrix[i][j] << ",";
+            }
+            outfile << endl;
+        }
     }
 }
