@@ -1,18 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <cmath>
-
-using namespace std;
-
-// function declarations
-vector< vector<int> > parse_input(char* filename);
-void print_matrix(char* filename, vector< vector<int> > matrix);
-vector< vector<int> > resize_matrix(vector< vector<int> > matrix);
-vector< vector<int> > nearest_neighbor(vector< vector<int> > matrix);
-vector< vector<int> > my_interpolation(vector< vector<int> > matrix);
+#include "main.hpp"
 
 int main(int argc, char* argv[]) {
     char* inputfile = argv[1];
@@ -45,7 +31,7 @@ vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
 	    }
 	}
 	else if ( row%2 == 0 && col == matrix.size()-1 ){
-	    int val = ceil(matrix[row][col-1] + 0.25*( abs( matrix[row+1][col] - matrix[row][col-1] ) ));
+	    int val = ceil(0.75*matrix[row][col-1] + 0.25*( abs( matrix[row+1][col] - matrix[row][col-1] ) ));
 	    matrix[row][col] = val;
 	}
         if ( row%2 != 0 && row != matrix.size()-1 ){
@@ -73,6 +59,7 @@ vector<vector<int> > nearest_neighbor(vector< vector<int> > matrix){
     return matrix;
 }
 
+/*
 vector< vector<int> > resize_matrix(vector< vector<int> > matrix){
     vector< vector<int> > newmatrix;
 
@@ -95,6 +82,7 @@ vector< vector<int> > resize_matrix(vector< vector<int> > matrix){
     }
     return newmatrix;
 }
+*/
 
 vector<vector<int> > parse_input(char* filename){
     ifstream infile(filename);
