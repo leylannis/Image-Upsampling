@@ -19,6 +19,10 @@ Image Upsampling in C++
         will produce line coverage output to the console
 
 ### Code Details and Complexity:
+    Interpolation Method 1:
+
+    Interpolation Method 2:
 
 
 ### Unit Test Descriptions:
+    
