@@ -1,7 +1,6 @@
 # COP4531 Assignment 2
-Leylanni Quijano-Shafer
-
-Image Upsampling in C++
+    Leylanni Quijano-Shafer
+    Grayscale Image Upsampling in C++
 
 ### How To Run:
     Makefile provided simplifies compilation and running process.
@@ -37,5 +36,19 @@ Image Upsampling in C++
         copied during nearest neighbor had more weight over the other point sampled
 
 ### Unit Test Descriptions:
+    Each unit test contains one or more check for corectness of each of the functions in main.hpp as described below
 
-    
+    ResizeNeg1Fill:
+        Tests resize_matrix()
+
+    PopulateSmallMatrix:
+        Tests parse_input()
+
+    TestNearestNeighbor:
+        Tests nearest_neighbor()
+
+    TestMyInterpolation:
+        Tests my_interpolation()
+
+    PrintingMatricies:
+        Tests print_matrix()
