@@ -1,6 +1,7 @@
 # COP4531 Assignment 2
     Leylanni Quijano-Shafer
     Grayscale Image Upsampling in C++
+    gitlab repo link: https://gitlab.com/leylannis/cop4531-assignment-2
 
 ### How To Run:
     Makefile provided simplifies compilation and running process.
