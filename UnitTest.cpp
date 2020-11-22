@@ -24,24 +24,43 @@ TEST(UnitTest, PopulateSmallMatrix){
 }
 
 TEST(UnitTest, TestNearestNeighbor){
-    std::vector<vector<int>> matrix1;
-    std::vector<int> row0 = {2,-1,3,-1};
-    std::vector<int> row13 = {-1,-1,-1,-1};
-    std::vector<int> row2 = {4,-1,5,-1};
-    matrix1.push_back(row0);
-    matrix1.push_back(row13);
-    matrix1.push_back(row2);
-    matrix1.push_back(row13);
+    std::vector<vector<int>> matrix1= {{2,-1,3,-1}, {-1,-1,-1,-1}, {4,-1,5,-1}, {-1,-1,-1,-1}};
 
     ASSERT_EQ(2, nearest_neighbor(matrix1)[1][1]);
-    ASSERT_EQ(2, nearest_neighbor(matrix1)[0][1]);
+    ASSERT_EQ(2, nearest_neighbor(matrix1)[1][0]);
+    ASSERT_EQ(2, nearest_neighbor(matrix1)[1][1]);
 
-// add more statements here !!
+    ASSERT_EQ(3, nearest_neighbor(matrix1)[0][3]);
+    ASSERT_EQ(3, nearest_neighbor(matrix1)[1][2]);
+    ASSERT_EQ(3, nearest_neighbor(matrix1)[1][3]);
 
+    ASSERT_EQ(4, nearest_neighbor(matrix1)[2][1]);
+    ASSERT_EQ(4, nearest_neighbor(matrix1)[3][0]);
+    ASSERT_EQ(4, nearest_neighbor(matrix1)[3][1]);
+
+    ASSERT_EQ(5, nearest_neighbor(matrix1)[2][3]);
+    ASSERT_EQ(5, nearest_neighbor(matrix1)[3][2]);
+    ASSERT_EQ(5, nearest_neighbor(matrix1)[3][3]);
 }
 
 TEST(UnitTest, TestMyInterpolation){
-	// unit test for my_interpolation()
+    std::vector<vector<int>> matrix = {{0,-1,0,-1},{-1,-1,-1,-1},{0,-1,0,-1},{-1,-1,-1,-1}};
+
+    ASSERT_EQ(0, my_interpolation(matrix)[0][1]);
+    ASSERT_EQ(1, my_interpolation(matrix)[0][3]);
+
+    ASSERT_EQ(0, my_interpolation(matrix)[1][0]);
+    ASSERT_EQ(1, my_interpolation(matrix)[1][1]);
+    ASSERT_EQ(0, my_interpolation(matrix)[1][2]);
+    ASSERT_EQ(2, my_interpolation(matrix)[1][3]);
+
+    ASSERT_EQ(0, my_interpolation(matrix)[2][1]);
+    ASSERT_EQ(1, my_interpolation(matrix)[2][3]);
+
+    ASSERT_EQ(1, my_interpolation(matrix)[3][0]);
+    ASSERT_EQ(1, my_interpolation(matrix)[3][1]);
+    ASSERT_EQ(1, my_interpolation(matrix)[3][2]);
+    ASSERT_EQ(9, my_interpolation(matrix)[3][3]);
 }
 
 TEST(UnitTest, PrintingMatricies){
