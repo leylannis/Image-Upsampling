@@ -18,7 +18,7 @@
         Will produce line coverage output to the console
 
 ### Code Details and Complexity:
-    Interpolation Method 1:
+    #### Interpolation Method 1:
         The one to be graded is my nearest_neighbor() method
         When starting implementation, I had two nested for loops that pushed back on the new vector
         to create the larger image, grabbing the value of the nearest pixel as expected
