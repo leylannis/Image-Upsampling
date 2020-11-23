@@ -10,8 +10,8 @@ int main(int argc, char* argv[]) {
     matrix = parse_input(inputfile);    
     newmatrix = resize_matrix(matrix);
 
-    newmatrix = nearest_neighbor(newmatrix);
-    //newmatrix = my_interpolation(newmatrix);
+    //newmatrix = nearest_neighbor(newmatrix);
+    newmatrix = my_interpolation(newmatrix);
 
     print_matrix(outputfile, newmatrix);
 
