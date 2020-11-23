@@ -9,4 +9,4 @@ coverage:
 	./coverage sample1_input_image.txt sample1_output_image.txt
 	~/.local/bin/gcovr -r .
 clean:
-	rm -f *.gcda *.gcno main test coverage
+	rm -f *.gcda *.gcno TestPrintingMatricies.txt main test coverage
