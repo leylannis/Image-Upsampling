@@ -18,6 +18,8 @@
         Ensure "sample1_input_image.txt" is in your current directory
         Will run main with input and output parameters
         Then will produce line coverage output to the console
+    "make clean"
+        To remove all execubtables and other newly created files
 
 ### Code Details and Complexity:
     Interpolation Method 1:
