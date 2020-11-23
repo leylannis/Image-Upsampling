@@ -10,6 +10,7 @@
 
     "make"
         Will compile main.cpp and produce the executable ./main
+        Can now be used by calling ./main input.txt output.txt (an input and output file of your choice)
     "make test"
         Will compile UnitTest.cpp and run unit tests
         Will produce googletest output to the console accordingly
@@ -17,7 +18,8 @@
         Will compile main.cpp for gcov to be run
         Ensure "sample1_input_image.txt" is in your current directory
         Will run main with input and output parameters
-        Then will produce line coverage output to the console
+        Then will produce line coverage based on main.cpp calling only one interpolation method (lower coverage of ~75%)
+        Results will output to the console
     "make clean"
         To remove all execubtables and other newly created files
 
