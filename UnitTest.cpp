@@ -20,7 +20,27 @@ TEST(UnitTest, ResizeNeg1Fill){
 }
 
 TEST(UnitTest, PopulateSmallMatrix){
-	// unit test for parse_input
+    char* filename = (char*)"PopulateSmallMatrix.txt";
+    ifstream infile(filename);
+    std::vector< vector<int> > matrix;
+
+    if (infile.is_open()){
+        string inputline;
+        int nextint;
+        char delim;
+        while (getline(infile, inputline)) {
+            istringstream linestream(inputline);
+            vector<int> row;
+            while (linestream >> nextint) {
+                row.push_back(nextint);
+                linestream >> delim;
+            }
+            matrix.push_back(row);
+        }
+        infile.close();
+    }
+
+    ASSERT_EQ(matrix, parse_input(filename));
 }
 
 TEST(UnitTest, TestNearestNeighbor){
@@ -44,27 +64,29 @@ TEST(UnitTest, TestNearestNeighbor){
 }
 
 TEST(UnitTest, TestMyInterpolation){
-    std::vector<vector<int>> matrix = {{0,-1,0,-1},{-1,-1,-1,-1},{0,-1,0,-1},{-1,-1,-1,-1}};
+    std::vector<vector<int>> matrix = {{0,-1},{-1,-1}};
 
-    ASSERT_EQ(0, my_interpolation(matrix)[0][1]);
-    ASSERT_EQ(1, my_interpolation(matrix)[0][3]);
+    ASSERT_EQ(0, my_interpolation(matrix)[0][0]);
+    ASSERT_EQ(1, my_interpolation(matrix)[0][1]);
 
     ASSERT_EQ(0, my_interpolation(matrix)[1][0]);
-    ASSERT_EQ(1, my_interpolation(matrix)[1][1]);
-    ASSERT_EQ(0, my_interpolation(matrix)[1][2]);
-    ASSERT_EQ(2, my_interpolation(matrix)[1][3]);
-
-    ASSERT_EQ(0, my_interpolation(matrix)[2][1]);
-    ASSERT_EQ(1, my_interpolation(matrix)[2][3]);
-
-    ASSERT_EQ(1, my_interpolation(matrix)[3][0]);
-    ASSERT_EQ(1, my_interpolation(matrix)[3][1]);
-    ASSERT_EQ(1, my_interpolation(matrix)[3][2]);
-    ASSERT_EQ(9, my_interpolation(matrix)[3][3]);
+    ASSERT_EQ(2, my_interpolation(matrix)[1][1]);
 }
 
-TEST(UnitTest, PrintingMatricies){
-	// test for correct printing of matricies
+TEST(UnitTest, TestPrintingMatricies){
+    vector< vector<int> > matrix{{1,1},{1,1}};
+    char* filename = (char*)"TestPrintingMatricies1.txt";
+
+    print_matrix(filename, matrix);
+
+    bool isEmpty = true;
+    ifstream file;
+    string line;
+    file.open(filename);
+    if (file >> line)
+	isEmpty = false;
+
+    ASSERT_FALSE(isEmpty);
 }
 
 int main(int argc, char **argv) {
