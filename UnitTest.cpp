@@ -2,19 +2,16 @@
 #include "main.hpp"
 
 TEST(UnitTest, ResizeNeg1Fill){
-    // resize_matrix() maps original image matrix to double the size
-    // a 4x4 matrix will be resized to an 8x8 with -1 in all new spaces
-
     std::vector<vector<int>> matrix04 (4, vector<int>(4,0));
     std::vector<vector<int>> matrix08 (8, vector<int>(8,0));
 
     for (int i=0; i<matrix04.size()*2; i++) {
         for (int j=0; j<matrix04.size()*2; j++) {
-	    if(i%2 == 0 && j%2 != 0)
-	    	matrix08[i][j] = -1;
-	    else if (i%2 != 0)
-		matrix08[i][j] = -1;
-	}
+	        if(i%2 == 0 && j%2 != 0)
+	    	    matrix08[i][j] = -1;
+	        else if (i%2 != 0)
+		        matrix08[i][j] = -1;
+	    }
     }
     ASSERT_EQ(matrix08, resize_matrix(matrix04));
 }
@@ -75,7 +72,7 @@ TEST(UnitTest, TestMyInterpolation){
 
 TEST(UnitTest, TestPrintingMatricies){
     vector< vector<int> > matrix{{1,1},{1,1}};
-    char* filename = (char*)"TestPrintingMatricies1.txt";
+    char* filename = (char*)"TestPrintingMatricies.txt";
 
     print_matrix(filename, matrix);
 
@@ -84,7 +81,7 @@ TEST(UnitTest, TestPrintingMatricies){
     string line;
     file.open(filename);
     if (file >> line)
-	isEmpty = false;
+	    isEmpty = false;
 
     ASSERT_FALSE(isEmpty);
 }
