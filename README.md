@@ -16,7 +16,8 @@
     "make coverage"
         Will compile main.cpp for gcov to be run
         Ensure "sample1_input_image.txt" is in your current directory
-        Will produce line coverage output to the console
+        Will run main with input and output parameters
+        Then will produce line coverage output to the console
 
 ### Code Details and Complexity:
     Interpolation Method 1:
@@ -41,9 +42,20 @@
 
     ResizeNeg1Fill:
         Tests resize_matrix()
+        This function is used to resize a matrix to two times its size, mapping exsting values to corresponding indicies
+        It fills in the unknows spaces with an invalid value of -1 to flag for later use
+        In this test, there is a 4x4 matrix of zeros and 8x8 matrix with -1 in the gaps
+        So it looks something like this:
+        matrix04:      matrix08: 
+        0 0 0 0         0  -1  0 -1  0  -1  0  -1
+        0 0 0 0        -1  -1 -1 -1  -1 -1  -1 -1
+        0 0 0 0         .... (repeated 4 times to complete 8x8)
+
+        The test asserts that the output of resize_matrix(matrix04) is equal to matrix08
 
     PopulateSmallMatrix:
         Tests parse_input()
+        
 
     TestNearestNeighbor:
         Tests nearest_neighbor()
