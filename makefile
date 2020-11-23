@@ -6,7 +6,7 @@ test:
 coverage:
 	g++ -std=c++11 -fprofile-arcs -ftest-coverage -fPIC main.cpp -o coverage
 	./coverage
-	./coverage sample1_input_image.txt
+	./coverage sample1_input_image.txt sample1_output_image.txt
 	~/.local/bin/gcovr -r .
 clean:
 	rm -f *.gcda *.gcno main test coverage
