@@ -55,13 +55,28 @@
 
     PopulateSmallMatrix:
         Tests parse_input()
-        
+        This unit test grabs the data from a file named "PopulateSmallMatrix.txt"
+        And pushes the data into a matrix
+        This matrix is then compared to the matrix returned by parse_input(file)
+        If they are the same, the test passes
 
     TestNearestNeighbor:
         Tests nearest_neighbor()
+        In this unit test I pass a matrix that resembles the output of resize_matrix()
+        input matrix:       expected nn result:
+        2 -1 3 -1           2 2 3 3
+        -1 -1 -1 -1         2 2 3 3
+        4 -1 5 -1           4 4 5 5
+        -1 -1 -1 -1         4 4 5 5
+        The values at each index after passing the matrix to the function are tested against expected outcome, will fail if incorrect
 
     TestMyInterpolation:
         Tests my_interpolation()
+        Passes a 2x2 matrix in the same format as if it went through resize_matrix() already
+        Verifies each index of output matches expected value based on math in the funct
 
     PrintingMatricies:
         Tests print_matrix()
+        Writes a 2x2 matrix containing all ones to a file "TestPrintingMatricies.txt"
+        Uses print_matrix(matrix, filename) then checks to make sure the file is not empty
+        Test will fail if nothing was writted to the file
