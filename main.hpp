@@ -54,21 +54,21 @@ vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
         int row = i/matrix.size();
         int col = i%matrix.size();
 
-        if ( row%2 == 0 && col != matrix.size()-1 ){
+        if ( row%2 == 0 && col != matrix.size()-1 ){        // even row, not last element
             if (matrix[row][col] == -1){
                 int val = ceil(0.75*matrix[row][col-1] + 0.25*( abs( matrix[row][col+1] - matrix[row][col-1] ) ));
                 matrix[row][col] = val;
             }
         }
-        else if ( row%2 == 0 && col == matrix.size()-1 ){
+        else if ( row%2 == 0 && col == matrix.size()-1 ){   // even row, last element
             int val = ceil(0.75*matrix[row][col-1] + 0.25*( abs( matrix[row+1][col] - matrix[row][col-1] ) ));
             matrix[row][col] = val;
         }
-        if ( row%2 != 0 && row != matrix.size()-1 ){
+        if ( row%2 != 0 && row != matrix.size()-1 ){        // odd row, not last element
             int val = ceil(matrix[row-1][col] + 0.25*( abs( matrix[row+1][col] - matrix[row-1][col] ) ));
             matrix[row][col] = val;
         }
-        else if ( row%2 != 0 && row == matrix.size()-1 ){
+        else if ( row%2 != 0 && row == matrix.size()-1 ){   // odd row, last element
             int val = ceil(matrix[row-1][col] + 0.25*( abs( matrix[row][col-1] - matrix[row-1][col] ) ));
             matrix[row][col] = val;
         }
@@ -79,7 +79,7 @@ vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
 vector<vector<int> > nearest_neighbor(vector< vector<int> > matrix){
     for (int i=0; i<matrix.size()*matrix.size(); i++){
         if ( (i/matrix.size())%2 == 0 ){
-            if (matrix[i/matrix.size()][i%matrix.size()] == -1)
+            if (matrix[i/matrix.size()][i%matrix.size()] == -1)     // change since invalid
                 matrix[i/matrix.size()][i%matrix.size()] = matrix[i/matrix.size()][i%matrix.size() - 1];
         }
         else{
