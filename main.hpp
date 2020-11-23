@@ -69,7 +69,7 @@ vector< vector<int> > my_interpolation(vector< vector<int> > matrix){
             matrix[row][col] = val;
         }
         else if ( row%2 != 0 && row == matrix.size()-1 ){
-            int val = ceil(0.75*matrix[row-1][col] + 0.25*( abs( matrix[row][col+1] - matrix[row-1][col] ) ));
+            int val = ceil(matrix[row-1][col] + 0.25*( abs( matrix[row][col-1] - matrix[row-1][col] ) ));
             matrix[row][col] = val;
         }
     }
