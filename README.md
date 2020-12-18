@@ -1,7 +1,6 @@
-# COP4531 Assignment 2
+# Image 2x Upsampling
     Leylanni Quijano-Shafer
     Grayscale Image Upsampling in C++
-    gitlab repo link: https://gitlab.com/leylannis/cop4531-assignment-2
 
 ### How To Run:
     Makefile provided simplifies compilation and running process.
@@ -16,7 +15,7 @@
         Will produce googletest output to the console accordingly
     "make coverage"
         Will compile main.cpp for gcov to be run
-        Ensure "sample1_input_image.txt" is in your current directory
+        Ensure "sample1_input_image.txt", a 512x512 matrix of 0-255 integer grayscale values of an image, is in your current directory
         Will run main with input and output parameters
         Then will produce line coverage based on main.cpp calling only one interpolation method (lower coverage of ~75%)
         Results will output to the console
